@@ -1,0 +1,643 @@
+/* ==========================================================================
+   Tip Calculator - Modern Teal Theme Stylesheet
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CSS Variables & Design System
+   -------------------------------------------------------------------------- */
+:root {
+  /* Teal Palette */
+  --teal-50:  #f0fdfa;
+  --teal-100: #ccfbf1;
+  --teal-200: #99f6e4;
+  --teal-300: #5eead4;
+  --teal-400: #2dd4bf;
+  --teal-500: #14b8a6;
+  --teal-600: #0d9488;
+  --teal-700: #0f766e;
+  --teal-800: #115e59;
+  --teal-900: #134e4a;
+  --teal-950: #042f2e;
+
+  /* Neutral Colors */
+  --bg-page:        #f3faf8;
+  --bg-card:        #ffffff;
+  --text-main:      #0f172a;
+  --text-muted:     #64748b;
+  --text-subtle:    #94a3b8;
+  --border-light:   #e2e8f0;
+  --border-focus:   #0d9488;
+
+  /* Feedback Colors */
+  --color-error:    #ef4444;
+  --color-error-bg: #fef2f2;
+
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Elevation / Shadows */
+  --shadow-sm: 0 2px 4px rgba(15, 118, 110, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 118, 110, 0.08);
+  --shadow-lg: 0 20px 45px -12px rgba(15, 118, 110, 0.16);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   Base & Reset
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background: radial-gradient(circle at top left, #e6fffa 0%, var(--bg-page) 60%, #e2f7f4 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  line-height: 1.5;
+}
+
+/* Hide spin buttons on number inputs for clean look */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* --------------------------------------------------------------------------
+   App Layout
+   -------------------------------------------------------------------------- */
+.app-container {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   Header Section
+   -------------------------------------------------------------------------- */
+.app-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.logo-icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 12px;
+  background: linear-gradient(135deg, var(--teal-500), var(--teal-700));
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 700;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(13, 148, 136, 0.28);
+}
+
+.app-header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--teal-900);
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Main Calculator Card
+   -------------------------------------------------------------------------- */
+.calculator-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(13, 148, 136, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .calculator-card {
+    flex-direction: row;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Left Panel: Form Inputs
+   -------------------------------------------------------------------------- */
+.input-panel {
+  flex: 1.1;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--teal-900);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.currency-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.label-with-value {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge {
+  background-color: var(--teal-100);
+  color: var(--teal-800);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid var(--teal-200);
+  transition: all 0.2s ease;
+}
+
+/* Input Wrapper & Text Field */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--teal-50);
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-md);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.input-wrapper:hover {
+  border-color: var(--teal-300);
+}
+
+.input-wrapper:focus-within {
+  border-color: var(--teal-600);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15);
+}
+
+.input-wrapper.error {
+  border-color: var(--color-error);
+  background-color: var(--color-error-bg);
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+}
+
+.currency-prefix {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--teal-700);
+  padding-left: 16px;
+  user-select: none;
+}
+
+.form-control {
+  width: 100%;
+  padding: 14px 16px 14px 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-main);
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.form-control::placeholder {
+  color: var(--text-subtle);
+  font-weight: 400;
+}
+
+.error-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-error);
+  min-height: 16px;
+  margin-top: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Slider Controls
+   -------------------------------------------------------------------------- */
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 0 4px;
+}
+
+.range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+/* Chrome / Safari / Edge Range Styling */
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid var(--teal-600);
+  box-shadow: 0 2px 6px rgba(15, 118, 110, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 10px rgba(15, 118, 110, 0.45);
+}
+
+.range-slider::-webkit-slider-thumb:active {
+  transform: scale(0.95);
+  border-color: var(--teal-700);
+}
+
+/* Firefox Range Styling */
+.range-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid var(--teal-600);
+  box-shadow: 0 2px 6px rgba(15, 118, 110, 0.35);
+  cursor: pointer;
+}
+
+.slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-subtle);
+  padding: 0 2px;
+}
+
+/* Quick Tip Buttons */
+.quick-tips {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.quick-tips-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.tip-pills {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.tip-pill {
+  padding: 8px 4px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  background-color: var(--teal-50);
+  color: var(--teal-800);
+  border: 1px solid var(--teal-200);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.tip-pill:hover {
+  background-color: var(--teal-100);
+  border-color: var(--teal-400);
+  transform: translateY(-1px);
+}
+
+.tip-pill.active {
+  background-color: var(--teal-600);
+  color: #ffffff;
+  border-color: var(--teal-600);
+  box-shadow: 0 4px 10px rgba(13, 148, 136, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   Stepper Controls (Number of People)
+   -------------------------------------------------------------------------- */
+.stepper {
+  display: flex;
+  align-items: center;
+  background-color: var(--teal-50);
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  transition: border-color 0.2s ease;
+}
+
+.stepper:focus-within {
+  border-color: var(--teal-600);
+}
+
+.stepper-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: var(--teal-800);
+  font-size: 22px;
+  font-weight: 700;
+  border: 1px solid var(--teal-200);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.stepper-btn:hover:not(:disabled) {
+  background-color: var(--teal-600);
+  color: #ffffff;
+  border-color: var(--teal-600);
+  transform: translateY(-1px);
+}
+
+.stepper-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.stepper-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background-color: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #94a3b8;
+}
+
+.stepper-input {
+  flex: 1;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-main);
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 6px;
+}
+
+.helper-text {
+  font-size: 11px;
+  color: var(--text-subtle);
+  margin-top: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Right Panel: Results & Summary
+   -------------------------------------------------------------------------- */
+.results-panel {
+  flex: 1;
+  background: linear-gradient(150deg, var(--teal-800) 0%, var(--teal-950) 100%);
+  color: #ffffff;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background accent glow */
+.results-panel::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(94, 234, 212, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.results-heading {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--teal-200);
+  letter-spacing: 0.2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 12px;
+}
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.result-row.secondary-row {
+  opacity: 0.9;
+  padding-bottom: 8px;
+  border-bottom: none;
+}
+
+.result-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.result-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.result-subtext {
+  font-size: 12px;
+  color: var(--teal-200);
+  opacity: 0.8;
+}
+
+.result-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--teal-300);
+  letter-spacing: -0.2px;
+}
+
+.result-value.secondary {
+  font-size: 18px;
+  color: var(--teal-200);
+}
+
+/* Highlighted Per-Person Card */
+.result-highlight-card {
+  margin-top: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(94, 234, 212, 0.25);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(8px);
+}
+
+.highlight-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.highlight-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.highlight-subtext {
+  font-size: 12px;
+  color: var(--teal-200);
+}
+
+.highlight-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Reset Button */
+.reset-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--teal-950);
+  background-color: var(--teal-300);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.reset-button:hover {
+  background-color: var(--teal-200);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.reset-button:active {
+  transform: translateY(0);
+}
+
+.reset-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* --------------------------------------------------------------------------
+   Footer Note
+   -------------------------------------------------------------------------- */
+.app-footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Adjustments
+   -------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  body {
+    padding: 16px 12px;
+  }
+
+  .input-panel {
+    padding: 24px 20px;
+  }
+
+  .results-panel {
+    padding: 24px 20px;
+  }
+
+  .app-header h1 {
+    font-size: 24px;
+  }
+
+  .tip-pills {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+
+  .tip-pill {
+    font-size: 12px;
+    padding: 6px 2px;
+  }
+
+  .highlight-value {
+    font-size: 24px;
+  }
+
+  .result-value {
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tip Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header Section -->
+    <header class="app-header">
+      <div class="logo-icon">₹</div>
+      <h1>Tip Calculator</h1>
+      <p class="subtitle">Calculate tips and split bills effortlessly</p>
+    </header>
+
+    <!-- Main Calculator Card -->
+    <main class="calculator-card">
+      <!-- Left Panel: Input Controls -->
+      <section class="panel input-panel" aria-label="Input details">
+        
+        <!-- 1. Bill Amount Input -->
+        <div class="form-group">
+          <label for="bill-input" class="form-label">
+            <span>Bill Amount</span>
+            <span class="currency-label">in Indian Rupees (₹)</span>
+          </label>
+          <div class="input-wrapper" id="bill-input-wrapper">
+            <span class="currency-prefix">₹</span>
+            <input
+              type="number"
+              id="bill-input"
+              class="form-control"
+              placeholder="0.00"
+              min="0"
+              step="any"
+              autocomplete="off"
+            />
+          </div>
+          <span class="error-text" id="bill-error" aria-live="polite"></span>
+        </div>
+
+        <!-- 2. Tip Percentage Slider -->
+        <div class="form-group">
+          <div class="label-with-value">
+            <label for="tip-slider" class="form-label">Tip Percentage</label>
+            <span class="badge" id="tip-badge">15%</span>
+          </div>
+          
+          <div class="slider-container">
+            <input
+              type="range"
+              id="tip-slider"
+              class="range-slider"
+              min="0"
+              max="30"
+              value="15"
+              step="1"
+            />
+            <div class="slider-ticks">
+              <span>0%</span>
+              <span>10%</span>
+              <span>20%</span>
+              <span>30%</span>
+            </div>
+          </div>
+
+          <!-- Quick Tip Preset Buttons -->
+          <div class="quick-tips">
+            <span class="quick-tips-label">Quick Select:</span>
+            <div class="tip-pills">
+              <button type="button" class="tip-pill" data-tip="5">5%</button>
+              <button type="button" class="tip-pill" data-tip="10">10%</button>
+              <button type="button" class="tip-pill active" data-tip="15">15%</button>
+              <button type="button" class="tip-pill" data-tip="20">20%</button>
+              <button type="button" class="tip-pill" data-tip="25">25%</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Number of People Stepper -->
+        <div class="form-group">
+          <label class="form-label" for="people-count">Split Among People</label>
+          <div class="stepper">
+            <button
+              type="button"
+              id="decrease-people"
+              class="stepper-btn"
+              title="Decrease number of people"
+              aria-label="Decrease people count"
+            >
+              &minus;
+            </button>
+            <input
+              type="number"
+              id="people-count"
+              class="stepper-input"
+              value="1"
+              min="1"
+              step="1"
+              aria-label="Number of people sharing bill"
+            />
+            <button
+              type="button"
+              id="increase-people"
+              class="stepper-btn"
+              title="Increase number of people"
+              aria-label="Increase people count"
+            >
+              &#43;
+            </button>
+          </div>
+          <span class="helper-text">Minimum 1 person</span>
+        </div>
+
+      </section>
+
+      <!-- Right Panel: Calculation Results -->
+      <section class="panel results-panel" aria-label="Calculation summary">
+        <h2 class="results-heading">Calculation Summary</h2>
+
+        <div class="results-list">
+          <!-- Total Tip Amount -->
+          <div class="result-row">
+            <div class="result-info">
+              <span class="result-label">Tip Amount</span>
+              <span class="result-subtext">Total tip on the bill</span>
+            </div>
+            <div class="result-value" id="tip-amount">₹0.00</div>
+          </div>
+
+          <!-- Total Bill Amount -->
+          <div class="result-row">
+            <div class="result-info">
+              <span class="result-label">Total Bill</span>
+              <span class="result-subtext">Bill + tip combined</span>
+            </div>
+            <div class="result-value" id="total-amount">₹0.00</div>
+          </div>
+
+          <!-- Tip Per Person -->
+          <div class="result-row secondary-row">
+            <div class="result-info">
+              <span class="result-label">Tip Per Person</span>
+              <span class="result-subtext">Tip share for each person</span>
+            </div>
+            <div class="result-value secondary" id="tip-per-person">₹0.00</div>
+          </div>
+
+          <!-- Amount Payable Per Person (Emphasized) -->
+          <div class="result-highlight-card">
+            <div class="highlight-info">
+              <span class="highlight-label">Amount Per Person</span>
+              <span class="highlight-subtext">Total payable by each person</span>
+            </div>
+            <div class="highlight-value" id="per-person-amount">₹0.00</div>
+          </div>
+        </div>
+
+        <!-- Reset Button -->
+        <button type="button" id="reset-btn" class="reset-button">
+          <svg class="reset-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          Reset Calculator
+        </button>
+      </section>
+    </main>
+
+    <!-- Footer Note -->
+    <footer class="app-footer">
+      <p>Clean &bull; Simple &bull; Instant calculation in ₹ INR</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
